@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link href="sass/main.css" rel="stylesheet">
+        <link href="assets/sass/main.css" rel="stylesheet">
     </head>
     <body>
         
@@ -25,8 +25,15 @@
                         reader.onload = function (e) {
                             var table = document.createElement("table");
                             var rows = e.target.result.split("\n");
-                            
-                            for (var i = 0; i < rows.length; i++) {
+                            var row1 = rows[0].split(",");
+                            if (row1.length > 1) {
+                                    var row0 = table.insertRow(-1);
+                                    for (var j = 0; j < row1.length; j++) {
+                                        var cell = row0.insertCell(-1);
+                                        cell.innerHTML = row1[j];
+                                    }
+                                }
+                            for (var i = 1; i < rows.length; i++) {
                                 var cells = rows[i].split(",");
                                 if (cells.length > 1) {
                                     var row = table.insertRow(-1);
@@ -49,6 +56,38 @@
                     alert("Please upload a valid CSV file.");
                 }
             }
+        </script>
+
+          
+
+        <script>
+        $(document).ready(function() {
+        $.ajax({
+        type: "GET",
+       url: "",
+        dataType: "text",
+        success: function(data) {processData(data);}
+     });
+});
+
+        function processData(fileUpload) {
+            var fileUploadLines = fileUpload.split(/\r\n|\n/);
+            var headers = fileUpload[0].split(',');
+            var lines = [];
+
+            for (var i=1; i<fileUpload.length; i++) {
+                var data = fileUpload[i].split(',');
+                if (data.length == headers.length) {
+
+                    var tarr = [];
+                    for (var j=0; j<headers.length; j++) {
+                        tarr.push(headers[j]+":"+data[j]);
+                    }
+                    lines.push(tarr);
+                }
+            }
+            // alert(lines);
+        }
         </script>
         
         

@@ -1,0 +1,27 @@
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+}
+
+select {
+  width: 100%;
+}
+
+td {
+  font-size: 20px;
+}
+
+tr {
+  background: red;
+}
+
+body {
+  background: purple;
+}
+/*# sourceMappingURL=csv.css.map */

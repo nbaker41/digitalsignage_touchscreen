@@ -1,0 +1,50 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link href="assets/sass/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <input type="file" id="file" name="file" onload="createTable()">
+        
+<script>
+function createTable() {
+    var array = [[1,2,3],[4,5,6],[7,8,9]];
+    var content = "";
+    array.forEach(function(row) {
+        content += "<tr>";
+        row.forEach(function(cell) {
+            content += "<td>" + cell + "</td>" ;
+        });
+        content += "</tr>";
+    });
+    document.getElementById("1").innerHTML = content;
+}
+
+var file = document.getElementById('file');
+file.addEventListener('change', function() {
+    var reader = new FileReader();
+    var f = file.files[0];
+    reader.onload = function(e) {
+        var CSVARRAY = parseResult(e.target.result); //this is where the csv array will be
+    };
+    reader.readAsText(f);
+});
+
+function parseResult(result) {
+    var resultArray = [];
+    result.split("\n").forEach(function(row) {
+        var rowArray = [];
+        row.split(",").forEach(function(cell) {
+            rowArray.push(cell);
+        });
+        resultArray.push(rowArray);
+    });
+    return resultArray;
+}
+</script>
+       
+    
+
+
+    </body>
+    </html>
